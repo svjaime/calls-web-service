@@ -29,4 +29,23 @@ public class Call extends PanacheEntity {
     @Column(name = "call_type")
     private CallType callType;
 
+    public String getCallerNumber() {
+        return callerNumber;
+    }
+
+    public String getCalleeNumber() {
+        return calleeNumber;
+    }
+
+    public Date getStartTimestamp() {
+        return startTimestamp;
+    }
+
+    public Date getEndTimestamp() {
+        return endTimestamp;
+    }
+
+    public CallType getCallType() {
+        return callType;
+    }
 }
