@@ -22,6 +22,7 @@ public interface CallResource {
      * @return A {@link Uni} containing a {@link List} of {@link Call} objects.
      */
     @GET
+    @Path("all")
     Uni<List<Call>> getAll();
 
     /**
@@ -31,7 +32,17 @@ public interface CallResource {
      * @return A {@link Uni} containing a {@link Response}.
      */
     @POST
-    Uni<Response> create(final Call call);
+    Uni<Response> createSingleCall(final Call call);
+
+    /**
+     * Create multiple Calls.
+     *
+     * @param calls The {@link List} of {@link Call} objects to persist.
+     * @return A {@link Uni} containing a {@link Response}.
+     */
+    @POST
+    @Path("multiple")
+    Uni<Response> createMultipleCalls(final List<Call> calls);
 
     /**
      * Delete a call by ID.

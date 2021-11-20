@@ -14,38 +14,19 @@ import java.util.Date;
 @Cacheable
 public class Call extends PanacheEntity {
 
-    @Column(name = "caller_number")
-    private String callerNumber;
+    @Column
+    public String callerNumber;
 
-    @Column(name = "callee_number")
-    private String calleeNumber;
+    @Column
+    public String calleeNumber;
 
-    @Column(name = "start_timestamp")
-    private Date startTimestamp;
+    @Column
+    public Date startTimestamp;
 
-    @Column(name = "end_timestamp")
-    private Date endTimestamp;
+    @Column
+    public Date endTimestamp;
 
-    @Column(name = "call_type")
-    private CallType callType;
+    @Column
+    public CallType callType;
 
-    public String getCallerNumber() {
-        return callerNumber;
-    }
-
-    public String getCalleeNumber() {
-        return calleeNumber;
-    }
-
-    public Date getStartTimestamp() {
-        return startTimestamp;
-    }
-
-    public Date getEndTimestamp() {
-        return endTimestamp;
-    }
-
-    public CallType getCallType() {
-        return callType;
-    }
 }
