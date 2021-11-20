@@ -4,10 +4,7 @@ import com.svjaime.callswebservice.domain.entity.Call;
 import io.smallrye.mutiny.Uni;
 import org.jboss.resteasy.reactive.RestPath;
 
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -15,6 +12,8 @@ import java.util.List;
  * API entry points for the Calls Web Service (REST).
  */
 @Path("/calls")
+@Produces("application/json")
+@Consumes("application/json")
 public interface CallResource {
 
     /**
