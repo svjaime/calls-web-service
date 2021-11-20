@@ -35,7 +35,7 @@ public interface CallResource {
     Uni<Response> create(final Call call);
 
     /**
-     * Delete a call.
+     * Delete a call by ID.
      *
      * @param id The call ID to delete
      * @return @return a {@link Uni} containing a {@link Response}.
