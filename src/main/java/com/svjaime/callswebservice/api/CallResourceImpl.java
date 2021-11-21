@@ -1,5 +1,6 @@
 package com.svjaime.callswebservice.api;
 
+import com.svjaime.callswebservice.api.response.PagingResponse;
 import com.svjaime.callswebservice.domain.entity.Call;
 import com.svjaime.callswebservice.domain.service.CallService;
 import io.smallrye.mutiny.Uni;
@@ -23,8 +24,8 @@ public class CallResourceImpl implements CallResource {
     CallService callService;
 
     @Override
-    public Uni<List<Call>> getAll() {
-        return callService.getAllCalls();
+    public Uni<PagingResponse> getAll(final Integer startIndex, final Integer lastIndex, final String callType) {
+        return callService.getAllCalls(startIndex, lastIndex, callType);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class CallResourceImpl implements CallResource {
     }
 
     @Override
-    public Uni<Response> delete(@RestPath final Long id) {
+    public Uni<Response> deleteCall(final Long id) {
         return callService.deleteById(id).map(deleted -> deleted
                 ? Response.ok().status(NO_CONTENT).build()
                 : Response.ok().status(NOT_FOUND).build());
