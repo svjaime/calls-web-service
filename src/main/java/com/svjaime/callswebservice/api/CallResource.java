@@ -1,11 +1,16 @@
 package com.svjaime.callswebservice.api;
 
+import com.svjaime.callswebservice.api.request.validator.EnumValue;
 import com.svjaime.callswebservice.api.response.PagingResponse;
 import com.svjaime.callswebservice.domain.entity.Call;
+import com.svjaime.callswebservice.domain.entity.CallType;
 import io.smallrye.mutiny.Uni;
 import org.jboss.resteasy.reactive.RestPath;
 import org.jboss.resteasy.reactive.RestQuery;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -21,16 +26,21 @@ public interface CallResource {
     /**
      * Get all calls.
      *
-     * @param startIndex The 'start at' index (inclusive).
+     * @param startIndex The 'start at' index.
      * @param lastIndex  The last index of the range (inclusive).
      * @param callType   Filter by call type.
      * @return A {@link Uni} containing a {@link PagingResponse} object.
      */
     @GET
     @Path("all")
-    Uni<PagingResponse> getAll(@RestQuery final Integer startIndex,
-                               @RestQuery final Integer lastIndex,
-                               @RestQuery final String callType);
+    Uni<PagingResponse> getAll(@RestQuery
+                               @PositiveOrZero final Integer startIndex,
+
+                               @RestQuery
+                               @PositiveOrZero final Integer lastIndex,
+
+                               @RestQuery
+                               @EnumValue(fieldName = "type", enumClass = CallType.class) final String callType);
 
     /**
      * Create a single Call.
@@ -39,7 +49,7 @@ public interface CallResource {
      * @return A {@link Uni} containing a {@link Response} object.
      */
     @POST
-    Uni<Response> createSingleCall(final Call call);
+    Uni<Response> createSingleCall(@Valid final Call call);
 
     /**
      * Create multiple Calls.
@@ -49,7 +59,7 @@ public interface CallResource {
      */
     @POST
     @Path("create")
-    Uni<Response> createMultipleCalls(final List<Call> calls);
+    Uni<Response> createMultipleCalls(@Valid final List<Call> calls);
 
     /**
      * Delete a call by ID.
@@ -59,6 +69,6 @@ public interface CallResource {
      */
     @DELETE
     @Path("{id}")
-    Uni<Response> deleteCall(@RestPath final Long id);
+    Uni<Response> deleteCall(@RestPath @Positive final Long id);
 
 }

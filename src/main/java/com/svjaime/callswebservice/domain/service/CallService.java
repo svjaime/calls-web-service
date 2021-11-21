@@ -25,19 +25,20 @@ public class CallService {
     /**
      * Get all calls, filtered by type.
      *
-     * @param startIndex The 'start at' index (inclusive).
+     * @param startIndex The 'start at' index.
      * @param lastIndex  The last index of the range (inclusive).
      * @param callType   Filter by call type.
      * @return A {@link Uni} containing a {@link PagingResponse} object.
      */
     public Uni<PagingResponse> getAllCalls(final Integer startIndex, final Integer lastIndex, final String callType) {
-        final Integer start = Optional.ofNullable(startIndex).filter(value -> value > 0).orElse(DEFAULT_START_INDEX);
-        final Integer last = Optional.ofNullable(lastIndex).filter(value -> value > 0).orElse(DEFAULT_LAST_INDEX);
-        final Optional<CallType> callTypeOptional = Optional.ofNullable(CallType.fromString(callType));
+        final Integer start = Optional.ofNullable(startIndex).orElse(DEFAULT_START_INDEX);
+        final Integer last = Optional.ofNullable(lastIndex).orElse(DEFAULT_LAST_INDEX);
+        final Optional<CallType> callTypeOptional = Optional.ofNullable(callType).map(CallType::fromString);
 
-        final PanacheQuery<Call> allCallsQuery = callTypeOptional.isPresent()
-                ? Call.find("callType", callTypeOptional.get())
-                : Call.findAll(); //TODO:\s throw exception?
+        final PanacheQuery<Call> allCallsQuery =
+                callTypeOptional.isPresent()
+                        ? Call.find("callType", callTypeOptional.get())
+                        : Call.findAll();
 
         return buildPagingResponseUni(start, last, allCallsQuery);
     }
