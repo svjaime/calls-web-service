@@ -88,7 +88,7 @@ public class PagingResponse {
         /**
          * Set the startIndex.
          *
-         * @param startIndex The 'start at' index (inclusive).
+         * @param startIndex The 'start at' index.
          * @return The {@link PagingResponseBuilder}.
          */
         public PagingResponseBuilder startIndex(final Integer startIndex) {
@@ -132,7 +132,7 @@ public class PagingResponse {
         /**
          * Returns a new {@link PagingResponse} with the builder's parameters.
          *
-         * @return The new {@link PagingResponse}
+         * @return The new {@link PagingResponse}.
          */
         public PagingResponse build() {
             return new PagingResponse(this);
