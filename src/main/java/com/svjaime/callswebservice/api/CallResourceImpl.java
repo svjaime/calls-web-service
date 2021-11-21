@@ -1,6 +1,7 @@
 package com.svjaime.callswebservice.api;
 
 import com.svjaime.callswebservice.api.response.PagingResponse;
+import com.svjaime.callswebservice.api.response.StatisticsResponse;
 import com.svjaime.callswebservice.domain.entity.Call;
 import com.svjaime.callswebservice.domain.service.CallService;
 import io.smallrye.mutiny.Uni;
@@ -45,5 +46,10 @@ public class CallResourceImpl implements CallResource {
         return callService.deleteById(id).map(deleted -> deleted
                 ? Response.ok().status(NO_CONTENT).build()
                 : Response.ok().status(NOT_FOUND).build());
+    }
+
+    @Override
+    public Uni<List<StatisticsResponse>> getStatistics() {
+        return callService.getStatistics();
     }
 }

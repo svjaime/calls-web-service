@@ -2,6 +2,7 @@ package com.svjaime.callswebservice.api;
 
 import com.svjaime.callswebservice.api.request.validator.EnumValue;
 import com.svjaime.callswebservice.api.response.PagingResponse;
+import com.svjaime.callswebservice.api.response.StatisticsResponse;
 import com.svjaime.callswebservice.domain.entity.Call;
 import com.svjaime.callswebservice.domain.entity.CallType;
 import io.smallrye.mutiny.Uni;
@@ -65,10 +66,19 @@ public interface CallResource {
      * Delete a call by ID.
      *
      * @param id The call ID to deleteCall
-     * @return @return a {@link Uni} containing a {@link Response} object.
+     * @return A {@link Uni} containing a {@link Response} object.
      */
     @DELETE
     @Path("{id}")
     Uni<Response> deleteCall(@RestPath @Positive final Long id);
+
+    /**
+     * Get statistics.
+     *
+     * @return A {@link Uni} containing a {@link List} of {@link StatisticsResponse} objects.
+     */
+    @GET
+    @Path("statistics")
+    Uni<List<StatisticsResponse>> getStatistics();
 
 }

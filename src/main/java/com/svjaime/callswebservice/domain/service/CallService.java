@@ -1,17 +1,24 @@
 package com.svjaime.callswebservice.domain.service;
 
 import com.svjaime.callswebservice.api.response.PagingResponse;
+import com.svjaime.callswebservice.api.response.StatisticsResponse;
 import com.svjaime.callswebservice.domain.entity.Call;
 import com.svjaime.callswebservice.domain.entity.CallType;
+import com.svjaime.callswebservice.util.StatisticsUtil;
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.quarkus.hibernate.reactive.panache.PanacheQuery;
+import io.quarkus.hibernate.reactive.panache.common.runtime.ReactiveTransactional;
 import io.smallrye.mutiny.Uni;
 import org.jboss.resteasy.reactive.RestPath;
 
 import javax.enterprise.context.ApplicationScoped;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Calls Service - to handle all the business logic.
@@ -30,6 +37,7 @@ public class CallService {
      * @param callType   Filter by call type.
      * @return A {@link Uni} containing a {@link PagingResponse} object.
      */
+    @ReactiveTransactional
     public Uni<PagingResponse> getAllCalls(final Integer startIndex, final Integer lastIndex, final String callType) {
         final Integer start = Optional.ofNullable(startIndex).orElse(DEFAULT_START_INDEX);
         final Integer last = Optional.ofNullable(lastIndex).orElse(DEFAULT_LAST_INDEX);
@@ -70,6 +78,41 @@ public class CallService {
      */
     public Uni<Boolean> deleteById(@RestPath final Long id) {
         return Panache.withTransaction(() -> Call.deleteById(id));
+    }
+
+    /**
+     * Get statistics.
+     *
+     * @return A {@link Uni} containing a {@link List} of {@link StatisticsResponse} objects.
+     */
+    @ReactiveTransactional
+    public Uni<List<StatisticsResponse>> getStatistics() {
+
+        final Uni<List<Call>> allCalls = Call.findAll().list();
+
+        return allCalls
+                .map(list -> list.stream().collect(Collectors.groupingByConcurrent(this::getDateFromCall, Collectors.toList())))
+                .map(map -> map.entrySet().parallelStream().map(callsByDayMap ->
+                                extractStats(callsByDayMap.getKey(), callsByDayMap.getValue()))
+                        .collect(Collectors.toList()));
+
+    }
+
+    private StatisticsResponse extractStats(final LocalDate date, final List<Call> list) {
+        return StatisticsResponse.builder()
+                .date(date)
+                .inboundCallsDuration(StatisticsUtil.getTotalCallsDuration(list, CallType.INBOUND))
+                .outboundCallsDuration(StatisticsUtil.getTotalCallsDuration(list, CallType.OUTBOUND))
+                .totalCalls(StatisticsUtil.getTotalCalls(list))
+                .totalCost(StatisticsUtil.getTotalCosts(list))
+                .callsByCallerMap(StatisticsUtil.getTotalCallsByCallerMap(list))
+                .callsByCalleeMap(StatisticsUtil.getTotalCallsByCalleeMap(list))
+                .build();
+    }
+
+    private LocalDate getDateFromCall(final Call call) {
+        final Instant instant = call.getStartTimestamp().toInstant();
+        return LocalDate.ofInstant(instant, ZoneId.of("UTC"));
     }
 
     private Uni<PagingResponse> buildPagingResponseUni(final Integer startIndex, final Integer lastIndex,
