@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "d18a20d2-1959-470b-8ea4-ba4894b61ac5",
+		"name": "calls-web-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get all calls",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/calls/all?startindex=4&lastindex=34&calltype=inbound",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calls",
+						"all"
+					],
+					"query": [
+						{
+							"key": "startindex",
+							"value": "4"
+						},
+						{
+							"key": "lastindex",
+							"value": "34"
+						},
+						{
+							"key": "calltype",
+							"value": "inbound"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create single call",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"callerNumber\": \"11111\",\r\n    \"calleeNumber\": \"33333\",\r\n    \"startTimestamp\":\"2019-10-24T02:28:25.000+0000\",\r\n    \"endTimestamp\":\"2019-10-24T02:35:25.000+0000\",\r\n    \"callType\":\"inbound\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/calls/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calls",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create multiple calls",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-25T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-25T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-26T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-26T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },{\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-25T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-25T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-26T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-26T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },{\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-25T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-25T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-26T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-26T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },{\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },{\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },{\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },{\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },{\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },{\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },{\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },{\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },{\r\n        \"callerNumber\": \"11111\",\r\n        \"calleeNumber\": \"333133\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111311\",\r\n        \"calleeNumber\": \"331333\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"outbound\"\r\n    },\r\n    {\r\n        \"callerNumber\": \"111141\",\r\n        \"calleeNumber\": \"333233\",\r\n        \"startTimestamp\": \"2019-10-24T02:28:25.000+0000\",\r\n        \"endTimestamp\": \"2019-10-24T02:35:25.000+0000\",\r\n        \"callType\": \"inbound\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/calls/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calls",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete call by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/calls/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calls",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Statistics",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/calls/statistics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"calls",
+						"statistics"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
