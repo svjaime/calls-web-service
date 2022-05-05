@@ -44,9 +44,7 @@ public class CallService {
         final Optional<CallType> callTypeOptional = Optional.ofNullable(callType).map(CallType::fromString);
 
         final PanacheQuery<Call> allCallsQuery =
-                callTypeOptional.isPresent()
-                        ? Call.find("callType", callTypeOptional.get())
-                        : Call.findAll();
+                callTypeOptional.map(c -> Call.<Call>find("callType", c)).orElseGet(Call::findAll);
 
         return buildPagingResponseUni(start, last, allCallsQuery);
     }
@@ -122,12 +120,12 @@ public class CallService {
         final Uni<List<Call>> itemList = query.range(startIndex, lastIndex).list()
                 .onFailure().recoverWithItem(Collections.emptyList());
 
-        return Uni.combine().all().unis(itemCount, itemList).combinedWith(unis ->
+        return Uni.combine().all().unis(itemCount, itemList).asTuple().map(t ->
                 PagingResponse.builder()
                         .startIndex(startIndex)
                         .lastIndex(lastIndex)
-                        .total((Long) unis.get(0))
-                        .items((List<Call>) unis.get(1))
+                        .total(t.getItem1())
+                        .items(t.getItem2())
                         .build());
     }
 
